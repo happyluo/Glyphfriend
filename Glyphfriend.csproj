@@ -11,6 +11,24 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VS2015|AnyCPU'">
+    <OutputPath>bin\VS2015\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VS15|AnyCPU'">
+    <OutputPath>bin\VS15\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -48,24 +66,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="EmojiCompletionProviders\EmojiCompletionSource.cs" />
-    <Compile Include="EmojiCompletionProviders\EmojiGlyphCompletionProvider.cs" />
-    <Compile Include="GlyphCompletionProviders\BaseGlyphfriendProvider.cs" />
-    <Compile Include="GlyphCompletionProviders\Implementations\EntypoGlyphCompletionProvider.cs" />
-    <Compile Include="GlyphCompletionProviders\Implementations\MetroUIGlyphCompletionProvider.cs" />
-    <Compile Include="GlyphCompletionProviders\Implementations\MaterialDesignGlyphCompletionProvider.cs" />
-    <Compile Include="GlyphCompletionProviders\Implementations\OcticonsGlyphCompletionProvider.cs" />
-    <Compile Include="GlyphCompletionProviders\Implementations\FoundationGlyphCompletionProvider.cs" />
-    <Compile Include="GlyphCompletionProviders\Implementations\IcoMoonGlyphCompletionProvider.cs" />
-    <Compile Include="GlyphCompletionProviders\Implementations\BootstrapGlyphCompletionProvider.cs" />
-    <Compile Include="GlyphCompletionProviders\Implementations\IonicGlyphCompletionProvider.cs" />
-    <Compile Include="GlyphCompletionProviders\Implementations\FontAwesomeGlyphCompletionProvider.cs" />
-    <Compile Include="GlyphfriendPackage.cs" />
-    <Compile Include="Helpers\Html\HtmlTextViewListener.cs" />
-    <Compile Include="Helpers\LazyImage.cs" />
-    <Compile Include="Helpers\Markdown\MarkdownContentTypeDefinition.cs" />
-    <Compile Include="Helpers\Markdown\MarkdownTextViewListener.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="**\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -74,11 +75,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSS.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.CSS.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" Condition="'$(Configuration)' != 'VS15'">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\Microsoft.CSS.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSS.Editor, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" Condition="'$(Configuration)' != 'VS15'">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\Microsoft.CSS.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSS.Core, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" Condition="'$(Configuration)' == 'VS15'">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\Extensions\Microsoft\Web Tools\Editors\Microsoft.CSS.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CSS.Editor, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.CSS.Editor, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" Condition="'$(Configuration)' == 'VS15'">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\Extensions\Microsoft\Web Tools\Editors\Microsoft.CSS.Editor.dll</HintPath>
     </Reference>
